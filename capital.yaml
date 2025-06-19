@@ -1,0 +1,692 @@
+openapi: 3.0.0
+info:
+  title: c{api}tal
+  description: |-
+    Collection for testing the c{api}tal API
+
+    https://github.com/gothinkster/realworld
+  version: 1.0.0
+servers:
+  - url: http://{{apiurl}}
+tags:
+  - name: Auth
+  - name: Articles
+  - name: Articles, Favorite, Comments
+  - name: Profiles
+  - name: Tags
+  - name: Membership
+paths:
+  /users:
+    post:
+      tags:
+        - Profiles
+      summary: Register Celeb
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: celeb_{{EMAIL}}
+                  password: '{{PASSWORD}}'
+                  username: celeb_{{USERNAME}}
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/users/login:
+    post:
+      tags:
+        - Auth
+      summary: Login and Remember Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: '{{EMAIL}}'
+                  password: '{{PASSWORD}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user:
+    get:
+      tags:
+        - Auth
+      summary: Current User
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Auth
+      summary: Update User and Remember Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: '{{EMAIL}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles:
+    get:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Articles by Tag
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: tag
+          in: query
+          schema:
+            type: string
+          example: dragons
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Create Article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                article:
+                  title: How to train your dragon
+                  description: Ever wonder how?
+                  body: Very carefully.
+                  tagList:
+                    - dragons
+                    - training
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles/feed:
+    get:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Feed
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles/{slug}:
+    get:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Single Article by slug
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Update Article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                article:
+                  body: With two hands
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Delete Article
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles/{slug}/favorite:
+    post:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Favorite Article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Unfavorite Article
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles/{slug}/comments:
+    post:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Create Comment for Article
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                comment:
+                  body: Thank you so much!
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Articles, Favorite, Comments
+      summary: All Comments for Article
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /articles/{slug}/comments/{commentId}:
+    delete:
+      tags:
+        - Articles, Favorite, Comments
+      summary: Delete Comment for Article
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: slug
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: commentId
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /profiles/celeb_{USERNAME}:
+    get:
+      tags:
+        - Profiles
+      summary: Celeb Profile
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: USERNAME
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /profiles/{USERNAME}:
+    get:
+      tags:
+        - Profiles
+      summary: Profile
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: USERNAME
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /profiles/celeb_{USERNAME}/follow:
+    post:
+      tags:
+        - Profiles
+      summary: Follow Profile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                user:
+                  email: '{{EMAIL}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: USERNAME
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Profiles
+      summary: Unfollow Profile
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+        - name: USERNAME
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tags:
+    get:
+      tags:
+        - Tags
+      summary: All Tags
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /membership:
+    post:
+      tags:
+        - Membership
+      summary: Purchase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                number: '{{CARD_NUMBER}}'
+                name: '{{CARD_NAME}}'
+                expiry: '{{EXPIRY}}'
+                cvc: '{{CVC}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: X-Requested-With
+          in: header
+          schema:
+            type: string
+          example: XMLHttpRequest
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Token {{token}}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

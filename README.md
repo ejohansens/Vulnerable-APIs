@@ -1,4 +1,7 @@
-Dataset of different vulnerable OpenAPI 3.0 specifications known to have BOLA vulnerabilities. 
+# Vulnerable OpenAPI 3.0 Specifications with BOLAs
+Dataset of different vulnerable OpenAPI 3.0 specifications known to have Broken Object Level Authorization (BOLA) vulnerabilities.
+Feel free to use this dataset for testing your tools or learning how to avoid creating APIs that contain these vulnerabilities.
+Specifications are gathered from different GitHub repositories, and I do not take credit for creating them.
 Below is a list of each API and the endpoint corresponding to the BOLA vulnerability:
 | API Name                 | Vulnerable Endpoints                                                                                          |
 |--------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -32,3 +35,5 @@ This repository is licensed under the GNU General Public License v3.0 (GPLv3).
 However, it also includes OpenAPI 3 specifications released initially under:
 - The Apache License 2.0 (in `/Apache`, see LICENSE file there)
 - The MIT License (in `/MIT`, see LICENSE file there)
+
+

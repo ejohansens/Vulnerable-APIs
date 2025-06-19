@@ -28,7 +28,7 @@ Below is a list of each API and the endpoint corresponding to the BOLA vulnerabi
 
 
 
-Notice:
+# Notice:
 
 This repository is licensed under the GNU General Public License v3.0 (GPLv3).
 

@@ -1,4 +1,8 @@
-Dataset of different vulnerable API's known to have BOLA vulnerabilities. 
+Dataset of different vulnerable OpenAPI 3.0 specifications known to have BOLA vulnerabilities. 
 
 
-This dataset contains components under Apache 2.0, MIT, and GPLv3 licenses. The combined dataset is redistributed under the terms of the GNU General Public License v3.0.
+This repository is licensed under the GNU General Public License v3.0 (GPLv3).
+
+However, it also includes OpenAPI 3 specifications released initially under:
+- The Apache License 2.0 (in `/Apache`, see LICENSE file there)
+- The MIT License (in `/MIT`, see LICENSE file there)
